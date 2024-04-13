@@ -1,5 +1,5 @@
 export interface Client {
-    accountId: number;
+    Id: number;
     lastName: string;
     firstName: string;
     middleName: string;

@@ -7,14 +7,23 @@ import { clientRouter } from './routes/ClientRoute';
 
 
 import { dbSetup } from './database';
-
+import session from 'express-session';
 
 require('module-alias/register');
 const app = express();
 const port = 3000;
-
+declare module 'express-session' {
+    interface SessionData {
+        user?: { fullName: string; Id: number };
+    }
+}
 app.use(bodyParser.json());
-
+app.use(session({
+    secret: 'qerrty1123',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false }
+}));
 app.use('/users', userRouter);
 app.use('/clients', clientRouter);
 

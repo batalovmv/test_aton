@@ -6,12 +6,9 @@ const saltRounds = 10;//количество раундов хешировани
 export async function generateData() {
     const db = await dbSetup();
 
-    let accountId = 0
-    
     // Клиенты
     for (let i = 0; i < 100; i++) {
         const client = {
-            accountId: accountId++,
             lastName: faker.person.lastName(),
             firstName: faker.person.firstName(),
             middleName: faker.person.middleName(),
@@ -22,9 +19,9 @@ export async function generateData() {
         };
 
         await db.run(`
-            INSERT INTO clients (accountId, lastName, firstName, middleName, birthDate, INN, responsibleFIO, status)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-            [client.accountId, client.lastName, client.firstName, client.middleName, client.birthDate, client.INN, client.responsibleFIO, client.status]
+            INSERT INTO clients ( lastName, firstName, middleName, birthDate, INN, responsibleFIO, status)
+            VALUES (?, ?, ?, ?, ?, ?, ?)`,
+            [client.lastName, client.firstName, client.middleName, client.birthDate, client.INN, client.responsibleFIO, client.status]
         );
     }
 
@@ -45,14 +42,13 @@ export async function generateData() {
         await db.run('INSERT INTO users (fullName, login, password) VALUES (?, ?, ?)', [fullName, login, password]);
     }
 
-    // Add a specific user with known login and password
     const hashedPassword = await bcryptjs.hash('test', saltRounds);
     await db.run('INSERT INTO users (fullName, login, password) VALUES (?, ?, ?)', ['Test User', 'test', hashedPassword]);
     for (let i = 0; i < 10; i++) {
+
     const responsibleUsers = await db.all("SELECT fullName FROM users ORDER BY RANDOM() ");
     responsibleUsers.forEach(async (user, index) => {
         const client = {
-            accountId: accountId++,
             lastName: faker.person.lastName(),
             firstName: faker.person.firstName(),
             middleName: faker.person.middleName(),
@@ -63,9 +59,9 @@ export async function generateData() {
         };
 
         await db.run(`
-            INSERT INTO clients (accountId, lastName, firstName, middleName, birthDate, INN, responsibleFIO, status)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-            [client.accountId, client.lastName, client.firstName, client.middleName, client.birthDate, client.INN, client.responsibleFIO, client.status]
+            INSERT INTO clients ( lastName, firstName, middleName, birthDate, INN, responsibleFIO, status)
+            VALUES ( ?, ?, ?, ?, ?, ?, ?)`,
+            [ client.lastName, client.firstName, client.middleName, client.birthDate, client.INN, client.responsibleFIO, client.status]
         );
     });
     

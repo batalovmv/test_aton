@@ -11,7 +11,7 @@ export async function dbSetup() {
 
     await db.exec(`
         CREATE TABLE IF NOT EXISTS clients (
-            accountId INTEGER PRIMARY KEY,
+            Id INTEGER PRIMARY KEY AUTOINCREMENT,
             lastName TEXT,
             firstName TEXT,
             middleName TEXT,
@@ -22,8 +22,9 @@ export async function dbSetup() {
         );
 
         CREATE TABLE IF NOT EXISTS users (
+            Id INTEGER PRIMARY KEY AUTOINCREMENT,
             fullName TEXT,
-            login TEXT PRIMARY KEY,
+            login TEXT KEY,
             password TEXT
         );
     `);

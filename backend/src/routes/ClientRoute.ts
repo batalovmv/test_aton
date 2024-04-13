@@ -5,6 +5,6 @@ import { getClientsForUser, updateClientStatus } from 'src/controllers/clientCon
 const router = Router();
 
 router.post('/updateStatus', updateClientStatus);
-router.get('/:userFullName', getClientsForUser);
+router.get('/getClientsList', getClientsForUser);
 
 export { router as clientRouter };
