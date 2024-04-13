@@ -26,7 +26,15 @@ export const authenticate = async (req: Request, res: Response) => {
     // Проверка пароля
     if (await bcryptjs.compare(password, user.password)) {
         const { fullName } = user;
-        res.json({ message: 'Аутентификация успешна', user: { fullName } });
+
+        // Загрузка клиентов, связанных с ФИО пользователя
+        const clients = await db.all("SELECT * FROM clients WHERE responsibleFIO = ?", [fullName]);
+
+        res.json({
+            message: 'Аутентификация успешна',
+            user: { fullName },
+            clients // Возвращаем список клиентов в ответе
+        });
     } else {
         res.status(401).json({ message: 'Неверный пароль' });
     }

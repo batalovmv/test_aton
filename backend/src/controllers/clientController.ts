@@ -1,6 +1,5 @@
-import { faker } from '@faker-js/faker';
+
 import { Request, Response } from 'express';
-import { dbSetup } from 'src/database';
 
 
 // Получение списка клиентов
