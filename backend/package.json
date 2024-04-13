@@ -4,9 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/index.ts",
-    "build": "tsc"
+    "start": "node server.js",
+    "dev": "nodemon ts-node -r tsconfig-paths/register server.js",
+    "generate-data": "ts-node src/generateData/allData.ts",
+    "start1": "ts-node -r tsconfig-paths/register  src/generateData/allData.ts"
+  },
+  "_moduleAliases": {
+    "@": "./src"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +20,7 @@
     "@types/express": "^4.17.21",
     "@types/morgan": "^1.9.9",
     "@types/node": "^20.12.7",
+    "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "class-transformer": "^0.5.1",
@@ -25,7 +30,11 @@
     "express": "^4.19.2",
     "Faker": "^0.7.2",
     "faker-js": "^1.0.0",
+    "module-alias": "^2.2.3",
     "morgan": "^1.10.0",
+    "reflect-metadata": "^0.2.2",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7",
     "ts-node": "^10.9.2",
     "typeorm": "^0.3.20",
     "typeorm-extension": "^3.5.1",
@@ -34,6 +43,7 @@
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
     "@types/bcryptjs": "^2.4.6",
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "tsconfig-paths": "^4.2.0"
   }
 }
