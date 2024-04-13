@@ -1,28 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { Request, Response } from 'express';
 import { dbSetup } from 'src/database';
-import { Client } from 'src/models/Сlient';
-export async function generateClients() {
-    const db = await dbSetup();
-    for (let i = 0; i < 10; i++) {
-        const client = {
-            accountId: faker.number.int({ min: 1000, max: 9999 }),
-            lastName: faker.person.lastName(),
-            firstName: faker.person.firstName(),
-            middleName: faker.person.middleName(),
-            birthDate: faker.date.past({ years: 30, refDate:'2000-01-01'}).toISOString().slice(0, 10),
-            INN: faker.finance.accountNumber(12),
-            responsibleFIO: `${faker.person.firstName()} ${faker.person.lastName()}`,
-            status: 'Не в работе'
-        };
 
-        await db.run(`
-            INSERT INTO clients (accountId, lastName, firstName, middleName, birthDate, INN, responsibleFIO, status)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-            [client.accountId, client.lastName, client.firstName, client.middleName, client.birthDate, client.INN, client.responsibleFIO, client.status]
-        );
-    }
-}
 
 // Получение списка клиентов
 export const getClientsForUser = async (req: Request, res: Response) => {

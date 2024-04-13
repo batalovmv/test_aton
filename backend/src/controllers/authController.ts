@@ -1,6 +1,4 @@
 import { Request, Response } from 'express';
-import { User } from '../models/User';
-import { faker } from '@faker-js/faker';
 import { dbSetup } from 'src/database';
 import bcryptjs from 'bcryptjs'
 
@@ -9,13 +7,27 @@ import bcryptjs from 'bcryptjs'
 
 export const authenticate = async (req: Request, res: Response) => {
     const { login, password } = req.body;
+
+    // Проверка на пустые значения логина или пароля
+    if (!login || !password) {
+        return res.status(400).json({ message: 'Логин и пароль не могут быть пустыми' });
+    }
+
     const db = await dbSetup();
+
+    // Попытка найти пользователя по логину
     const user = await db.get('SELECT * FROM users WHERE login = ?', [login]);
 
-    if (user && await bcryptjs.compare(password, user.password)) {
-        const { fullName } = user; 
+    // Проверка, найден ли пользователь
+    if (!user) {
+        return res.status(401).json({ message: 'Неверный логин' });
+    }
+
+    // Проверка пароля
+    if (await bcryptjs.compare(password, user.password)) {
+        const { fullName } = user;
         res.json({ message: 'Аутентификация успешна', user: { fullName } });
     } else {
-        res.status(401).json({ message: 'Неверные учетные данные' });
+        res.status(401).json({ message: 'Неверный пароль' });
     }
 };
