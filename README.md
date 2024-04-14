@@ -24,7 +24,7 @@ git clone https://github.com/batalovmv/test_aton.git
 cd test_aton
 ```
 
-2. Перейдите в папку фронтенда 
+2. Перейдите в папку бэкэнда 
 ```bash
 cd /backend
 ```
@@ -36,12 +36,12 @@ npm install
 
 4. сгенерируйте данные пользователей
 ```bash
-npm start1
+npm run start1
 ```
 
 5. Запустите сервер разработки 
 ```bash
-npm start
+npm run start
 ```
 
 6. Перейдите в папку фронтенда 
@@ -56,7 +56,7 @@ npm install
 
 8. Запустите сервер разработки 
 ```bash
-npm dev
+npm run dev
 ```
 
 
