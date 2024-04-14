@@ -34,17 +34,16 @@ const ClientList: React.FC = () => {
             <tbody>
                 {clients.map(client => (
                     <tr key={client.Id}>
-                        <td>{client.accountNumber}</td>
-                        <td>{client.surname}</td>
-                        <td>{client.name}</td>
-                        <td>{client.patronymic}</td>
+                        <td>{client.Id}</td>
+                        <td>{client.lastName}</td>
+                        <td>{client.firstName}</td>
+                        <td>{client.middleName}</td>
                         <td>{client.birthDate}</td>
                         <td>{client.INN}</td>
                         <td>{client.responsibleFIO}</td>
                         <td>{client.status}</td>
                         <td>
                             <select value={client.status} onChange={(e) => handleStatusChange(client.Id, e.target.value)}>
-                                <option value="Не в работе">Не в работе</option>
                                 <option value="В работе">В работе</option>
                                 <option value="Отказ">Отказ</option>
                                 <option value="Сделка закрыта">Сделка закрыта</option>

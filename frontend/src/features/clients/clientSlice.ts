@@ -1,19 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { fetchClients as fetchClientsApi, updateClientStatus as updateClientStatusApi } from '../../services/api';
-import { UpdateStatusParams } from './types';
-
-interface Client {
-    Id: number;
-    accountNumber: string;
-    surname: string;
-    name: string;
-    patronymic: string;
-    birthDate: string;
-    INN: string;
-    responsibleFIO: string;
-    status: string;
-}
+import { Client, UpdateStatusParams } from './types';
 
 interface ClientsState {
     clients: Client[];

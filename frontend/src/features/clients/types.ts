@@ -6,9 +6,9 @@ export interface UpdateStatusParams {
 export interface Client {
     Id: number;
     accountNumber: string;
-    surname: string;
-    name: string;
-    patronymic: string;
+    lastName: string;
+    firstName: string;
+    middleName: string;
     birthDate: string;
     INN: string;
     responsibleFIO: string;
