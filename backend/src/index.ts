@@ -27,7 +27,7 @@ app.use(session({
 app.use('/users', userRouter);
 app.use('/clients', clientRouter);
 
-// Инициализация базы данных и генерация данных
+// Инициализация базы данных 
 async function initializeDatabase() {
     const db = await dbSetup();
     app.locals.db = db
