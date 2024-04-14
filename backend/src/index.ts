@@ -8,6 +8,7 @@ import { clientRouter } from './routes/ClientRoute';
 
 import { dbSetup } from './database';
 import session from 'express-session';
+import cors from 'cors';
 
 require('module-alias/register');
 const app = express();
@@ -17,6 +18,11 @@ declare module 'express-session' {
         user?: { fullName: string; Id: number };
     }
 }
+app.use(cors({
+    origin: ['http://localhost:5173'],
+    methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
+    credentials: true 
+}));
 app.use(bodyParser.json());
 app.use(session({
     secret: 'qerrty1123',
