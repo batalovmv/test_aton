@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { Form, Input, Button } from "antd";
 import { login } from "./authSlice";
 import { useAppDispatch } from "../../app/hooks";
 
@@ -13,11 +13,34 @@ export const Login: React.FC = () => {
     };
 
     return (
-        <div>
-            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Логин" />
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Пароль" />
-            <button onClick={handleLogin}>Войти</button>
-        </div>
+        <Form
+            name="basic"
+            initialValues={{ remember: true }}
+            onFinish={handleLogin}
+            autoComplete="off"
+        >
+            <Form.Item
+                label="Логин"
+                name="username"
+                rules={[{ required: true, message: 'Пожалуйста, введите ваш логин!' }]}
+            >
+                <Input value={username} onChange={(e) => setUsername(e.target.value)} />
+            </Form.Item>
+
+            <Form.Item
+                label="Пароль"
+                name="password"
+                rules={[{ required: true, message: 'Пожалуйста, введите ваш пароль!' }]}
+            >
+                <Input.Password value={password} onChange={(e) => setPassword(e.target.value)} />
+            </Form.Item>
+
+            <Form.Item>
+                <Button type="primary" htmlType="submit">
+                    Войти
+                </Button>
+            </Form.Item>
+        </Form>
     );
 };
 
