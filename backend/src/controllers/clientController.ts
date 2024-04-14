@@ -26,10 +26,11 @@ export const updateClientStatus = async (req: Request, res: Response) => {
         return res.status(403).json({ message: "Необходима аутентификация" });
     }
 
-    const { Id, newStatus } = req.body;
+    const Id = req.params.Id; 
+    const { newStatus } = req.body; 
     const userFullName = req.session.user.fullName; // Используем имя пользователя из сессии
     const db = req.app.locals.db;
-    
+
     try {
         // Проверяем существование клиента
         const checkClientExists = await db.get("SELECT * FROM clients WHERE Id = ?", [Id]);

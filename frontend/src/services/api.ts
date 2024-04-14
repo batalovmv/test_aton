@@ -26,7 +26,7 @@ export const fetchClients = async (): Promise<Client[]> => {
 
 export const updateClientStatus = async (params: UpdateStatusParams): Promise<void> => {
     try {
-        const response = await axios.put(`/clients/${params.Id}`, { newStatus: params.newStatus });
+        const response = await axios.patch(`/clients/updateStatus/${params.Id}`, { newStatus: params.newStatus });
         return response.data;
     } catch (error: unknown) {
         const axiosError = error as AxiosError;

@@ -4,7 +4,7 @@ import { getClientsForUser, updateClientStatus } from 'src/controllers/clientCon
 
 const router = Router();
 
-router.post('/updateStatus', updateClientStatus);
+router.patch('/updateStatus/:Id', updateClientStatus);
 router.get('/getClientsList', getClientsForUser);
 
 export { router as clientRouter };
