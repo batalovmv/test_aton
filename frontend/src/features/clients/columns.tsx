@@ -1,6 +1,6 @@
 import React from 'react';
 import { Select } from 'antd';
-import { Client } from './types'; // Подставьте правильный путь к вашим типам
+import { Client } from './types'; 
 
 const { Option } = Select;
 

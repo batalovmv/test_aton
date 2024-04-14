@@ -1,4 +1,3 @@
-import  { AxiosError } from 'axios';
 import { LoginParams, User } from '../features/auth/types';
 import { Client, UpdateStatusParams } from '../features/clients/types';
 import axios from './axiosConfig'

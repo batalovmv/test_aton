@@ -22,7 +22,7 @@ export const login = createAsyncThunk<User, LoginParams, { rejectValue: string }
             const data = await authenticate(loginParams);
             return data; 
         } catch (error: any) {
-            return rejectWithValue(error.response?.data?.message || "Unknown error");
+            return rejectWithValue(error.message || "Unknown error");
         }
     }
 );

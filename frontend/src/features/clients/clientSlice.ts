@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store';
 import { fetchClients as fetchClientsApi, updateClientStatus as updateClientStatusApi } from '../../services/api';
 import { Client, UpdateStatusParams } from './types';
 
@@ -19,9 +18,10 @@ export const fetchClients = createAsyncThunk<Client[], void, { rejectValue: stri
     'clients/fetchClients',
     async (_, { rejectWithValue }) => {
         try {
-            return await fetchClientsApi();
+            const clients = await fetchClientsApi();
+            return clients;
         } catch (error: any) {
-            return rejectWithValue(error.response?.data?.message || "Unknown error");
+            return rejectWithValue(error.message || "Unknown error");
         }
     }
 );
@@ -32,11 +32,10 @@ export const updateClientStatus = createAsyncThunk<void, UpdateStatusParams, { r
         try {
             await updateClientStatusApi(params);
         } catch (error: any) {
-            return rejectWithValue(error.response?.data?.message || "Unknown error");
+            return rejectWithValue(error.message || "Unknown error");
         }
     }
 );
-
 
 const clientSlice = createSlice({
     name: 'clients',
@@ -67,6 +66,5 @@ const clientSlice = createSlice({
             });
     },
 });
-
 
 export default clientSlice.reducer;
