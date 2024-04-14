@@ -1,30 +1,115 @@
-# React + TypeScript + Vite
+# Тестовое задание АТОН
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Состоит из двух частей backend и frontend, представляет собой базу данных пользователей + клиентов, форму регистрации и показ клиентов привязанных к пользователю также возможность смены статуса этих клиентов
 
-Currently, two official plugins are available:
+## Начало работы
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Эти инструкции помогут вам запустить копию проекта на вашей локальной машине
 
-## Expanding the ESLint configuration
+### Предварительные требования
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Что нужно установить на компьютер и как установить:
 
-- Configure the top-level `parserOptions` property like this:
+```bash
+npm install npm@latest -g
+```
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
+### Установка
+
+Пошаговый процесс установки и запуска разработческого окружения.
+
+1. Клонируйте репозиторий
+```bash
+git clone https://github.com/batalovmv/test_aton.git
+cd test_aton
+```
+
+2. Перейдите в папку фронтенда 
+```bash
+cd /backend
+```
+
+3. Установите зависимости NPM
+```bash
+npm install
+```
+
+4. сгенерируйте данные пользователей
+```bash
+npm start1
+```
+
+5. Запустите сервер разработки 
+```bash
+npm start
+```
+
+6. Перейдите в папку фронтенда 
+```bash
+cd ../frontend
+```
+
+7. Установите зависимости NPM
+```bash
+npm install
+```
+
+8. Запустите сервер разработки 
+```bash
+npm dev
+```
+
+
+## Использование
+
+Данные пользователя для теста :
+```http
+  login: test,
+  password: test
+```
+### Аутентификация пользователей
+
+Пользователи могут войти в систему, используя следующий endpoint:
+```http
+POST  http://localhost:3000/users/login
+{
+  "login": "test",
+  "password": "test"
 }
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Получение списка клиентов
+
+Авторизованные пользователи могут получать список клиентов, за которыми они закреплены:
+```http
+GET http://localhost:3000/clients/getClientsList
+```
+
+### Обновление статуса клиента
+
+Авторизованные пользователи могут обновлять статус своего клиента:
+```http
+PATCH http://localhost:3000/clients/updateStatus/{Id}
+{
+  "newStatus": "новый_статус"
+}
+```
+
+
+## Сделано с использованием
+
+- [Express](https://expressjs.com/) - фреймворк веб-приложений
+- [SQLite](https://www.sqlite.org/index.html) - СУБД (выбрана из-за простоты проекта)
+- [Node.js](https://nodejs.org/) - среда выполнения сервера
+- [bcrypt.js](https://github.com/dcodeIO/bcrypt.js) - библиотека для хеширования паролей
+- [React](https://reactjs.org/) - библиотека для построения пользовательского интерфейса
+- [Redux](https://redux.js.org/) - библиотека для управления состоянием приложения
+- [Vite](https://vitejs.dev/) - инструмент сборки, который значительно ускоряет процесс разработки
+- [Axios](https://axios-http.com/) - библиотека для выполнения HTTP-запросов
+- [Faker](https://fakerjs.dev/) - библиотека для генерации моковых данных
+- [Ant Design](https://ant.design/) - дизайн-система, включающая набор компонентов интерфейса для React (выбрана ради ускорения процесса)
+
+## Авторы
+
+* **Баталов Михаил**
+
